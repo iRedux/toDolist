@@ -1,0 +1,32 @@
+<%- include('header') %>
+<div class="container mt-5">
+    <div class="row justify-content-md-center">
+        <div class="col-md-6 mt-5 mb-3">
+            <div class="card text-left shadow">
+            <a href="/"><img class="logo center" src="images/logo.png" alt="ToDoList"></a>
+            <div class="card-body">
+                <h6 class="card-title alert alert-success"><%= day %></h6>
+                <p class="card-text">
+                    <% let i = 0; %> 
+                    <ul class="list-group" id="list">
+                        <% newListItem.forEach(function(item){ %>
+                            <% i++; %> 
+                            <li class="list-group-item" id="li-<%= i %>">
+                                <span><%= item %> </span>
+                            </li>
+                        <% }); %>
+                    </ul>
+                    <hr>
+                    <form action="/" method="post">
+                        <input type="text" class="form-control" name="toDo" placeholder="Something to do">
+                        <div class="form-group mt-2 d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </p>
+            </div>
+            </div>
+        </div>
+    </div>
+<%- include('footer') %>
+
