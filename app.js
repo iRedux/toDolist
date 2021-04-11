@@ -28,8 +28,18 @@ app.post("/", function(req, res){
         items.push(item);
     }
     
-
     res.redirect("/"); 
+});
+
+app.post("/delete", function(req, res){
+    let item = parseFloat(req.body.item);
+    let starting = parseFloat(req.body.item - 1);
+
+    if(item){
+        items.splice(starting, 1);
+    }
+
+    res.redirect("/");
 });
 
 app.listen(process.env.PORT || port, function(){
