@@ -12,7 +12,7 @@
                         <% newListItem.forEach(function(item){ %>
                             <% i++; %> 
                             <li class="list-group-item" id="li-<%= i %>">
-                                <span class="h6"><%= item %></span> 
+                                <span><%= item %></span> 
                                 <span class="float-end">
                                     <form action="/delete" method="post">
                                         <input type="hidden" name="item" value="<%= i %>">
