@@ -11,7 +11,7 @@
                     <ul class="list-group" id="list">
                         <% newListItem.forEach(function(item){ %>
                             <% i++; %> 
-                            <li class="list-group-item" id="li-<%= i %>">
+                            <li class="list-group-item <% if(JSON.stringify(isActive[i-1].isActive) === "true"){ %> active underline <% } %>" id="li-<%= i %>">
                                 <span><%= item %></span> 
                                 <span class="float-end">
                                     <form action="/delete" method="post">

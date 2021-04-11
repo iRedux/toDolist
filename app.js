@@ -5,6 +5,7 @@ const app = express();
 const port = 3000;
 
 let items = [];
+let isActive = [];
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
@@ -19,16 +20,38 @@ app.get("/", function(req, res){
     };
     
     let day = new Date().toLocaleDateString('en-US', options);
-    res.render('index', {day: day, newListItem: items});
+    res.render('index', {day: day, newListItem: items, isActive: isActive});
 });
 
 app.post("/", function(req, res){
     let item = req.body.toDo;
     if(item) {
         items.push(item);
+        isActive.push({
+            itemId: (items.length) - 1,
+            isActive: false
+        });
     }
     
     res.redirect("/"); 
+});
+
+app.post("/active", function(req, res){
+    req.on("data", function(data){
+        let itemData = JSON.parse(data);
+        let itemId = itemData.x;
+
+        isActive.forEach(function(item){
+            if(item.itemId === itemId) {
+                if(JSON.stringify(isActive[itemId].isActive) === "true") {
+                    isActive[itemId].isActive = false;
+                } else {
+                    isActive[itemId].isActive = true;
+                }
+                    
+            }
+        });    
+    });
 });
 
 app.post("/delete", function(req, res){
